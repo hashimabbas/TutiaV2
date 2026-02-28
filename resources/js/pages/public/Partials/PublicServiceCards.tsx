@@ -1,123 +1,169 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
-// Define the complete data structure for all 10 services
 const servicesData = [
-    {
-        title: 'E-commerce',
-        url: '/ecommerce',
-        img: 'images/services/e-commerce-gee.png',
-        desc: 'Matger-TUTIA electronically selling of products on online services or over the Internet with several types of payment ....',
-        animation: 'e-commerce-animation',
-    },
-    {
-        title: 'Bluk SMS',
-        url: '/sms',
-        img: 'images/services/sms-bluk-service.jpg',
-        desc: 'Now in this competitive business TUTIA SMS marketing services has expanded it wings and started delivering efﬁcient ....',
-        animation: 'sms-animation',
-    },
-    {
-        title: 'Web Development',
-        url: '/web',
-        img: 'images/services/web-design.jpg',
-        desc: 'We design static and dynamic websites for all fields according to high quality principles and standards ...',
-        animation: 'web-animation',
-    },
-    {
-        title: 'ICT Consultancey',
-        url: '/ict',
-        img: 'images/services/business-gbf.jpg',
-        desc: 'Our information and communications technology(ICT) consultancey enusures technology not only meets the requirements of ...',
-        animation: 'ict-animation',
-    },
-    {
-        title: 'Connectivity Solution',
-        url: '/connectivity',
-        img: 'images/services/network-g.jpg',
-        desc: 'We use the latest and most advanced mobile coverage solutions approved by service provider with all network ....',
-        animation: 'connectivity-animation',
-    },
-    {
-        title: 'Ticketing System',
-        url: '/ticketing',
-        img: 'images/services/tickting.png',
-        desc: 'TUTIA ticketing system is software that automates your sales, marketing, operations, and ﬁnances. Our software ......',
-        animation: 'ticketing-animation',
-    },
-    {
-        title: 'Payment Gateway',
-        url: '/payment',
-        img: 'images/services/payment.jpg',
-        desc: 'With TUTIA Payment gateway work with all major credit card networks, digital wallets, and ecommerce platforms ...',
-        animation: 'payment-animation',
-    },
-    {
-        title: 'VPN',
-        url: '/vpn',
-        img: 'images/services/vpn_safety.jpg',
-        desc: 'Using TUTIA VPNs is extremely important for any modern business which has a ﬂexible and mobile workforce. As .......',
-        animation: 'vpn-animation',
-    },
-    {
-        title: 'ERP Systems',
-        url: '/erp',
-        img: 'images/services/erp.jpg',
-        desc: 'Increase control over your business with software designed to grow with you. Streamline key ...',
-        animation: 'erp-animation',
-    },
-    {
-        title: 'Call Center',
-        url: '/call_center',
-        img: 'images/services/call-centre.jpg',
-        desc: 'When a call center modernizes beyond phone calls to support digital channels, it’s even more critical to integrate .....',
-        animation: 'call-animation',
-    },
+  {
+    title: 'E-commerce',
+    href: '/ecommerce',
+    img: 'images/services/e-commerce-gee.png',
+    desc: 'Matger-TUTIA electronically selling of products on online services or over the Internet with several types of payment ....',
+  },
+  {
+    title: 'Bulk SMS',
+    href: '/sms',
+    img: 'images/services/sms-bluk-service.jpg',
+    desc: 'Now in this competitive business TUTIA SMS marketing services has expanded it wings and started delivering efﬁcient ....',
+  },
+  {
+    title: 'Web Development',
+    href: '/web',
+    img: 'images/services/web-design.jpg',
+    desc: 'We design static and dynamic websites for all fields according to high quality principles and standards ...',
+  },
+  {
+    title: 'ICT Consultancy',
+    href: '/ict',
+    img: 'images/services/business-gbf.jpg',
+    desc: 'Our information and communications technology(ICT) consultancey enusures technology not only meets the requirements of ...',
+  },
+  {
+    title: 'Connectivity Solution',
+    href: '/connectivity',
+    img: 'images/services/network-g.jpg',
+    desc: 'We use the latest and most advanced mobile coverage solutions approved by service provider with all network ....',
+  },
+  {
+    title: 'Ticketing System',
+    href: '/ticketing',
+    img: 'images/services/tickting.png',
+    desc: 'TUTIA ticketing system is software that automates your sales, marketing, operations, and ﬁnances. Our software ......',
+  },
+  {
+    title: 'Payment Gateway',
+    href: '/payment',
+    img: 'images/services/payment.jpg',
+    desc: 'With TUTIA Payment gateway work with all major credit card networks, digital wallets, and ecommerce platforms ...',
+  },
+  {
+    title: 'VPN',
+    href: '/vpn',
+    img: 'images/services/vpn_safety.jpg',
+    desc: 'Using TUTIA VPNs is extremely important for any modern business which has a ﬂexible and mobile workforce. As .......',
+  },
+  {
+    title: 'ERP Systems',
+    href: '/erp',
+    img: 'images/services/erp.jpg',
+    desc: 'Increase control over your business with software designed to grow with you. Streamline key ...',
+  },
+  {
+    title: 'Call Center',
+    href: '/call_center',
+    img: 'images/services/call-centre.jpg',
+    desc: 'When a call center modernizes beyond phone calls to support digital channels, it’s even more critical to integrate .....',
+  },
+  {
+    title: 'Satellite Agriculture',
+    href: '/satellite-agriculture',
+    img: 'images/services/satellite-agriculture.jpg',
+    desc: "Satellite-based monitoring for high-frequency crop health tracking, soil moisture measurement, and sustainable farming.",
+  }
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants: any = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  }
+};
+
 export default function PublicServiceCards() {
-    // Helper to map Laravel's url() equivalent
-    const url = (path: string) => `/${path.replace(/^\//, '')}`;
-
-    return (
-        // <!-- Event Start -->
-        <div className="event">
-            <div className="container">
-                <div className="section-header text-center">
-                    {/* Note: All original inline styles are removed and rely on CSS/classes */}
-                    <p>Our Services</p>
-                </div>
-
-                {/*
-                  The original HTML used four separate <div class="row"> blocks.
-                  For simplicity and React performance, we will use one loop
-                  and rely on Bootstrap's col-lg-4 to wrap items into rows of three.
-                */}
-                <div className="row">
-                    {servicesData.map((service, index) => (
-                        <div key={index} className="col-lg-4">
-                            {/* ScrollReveal Animation Class applied here */}
-                            <div className={`event-item ${service.animation}`}>
-                                <img src={service.img} width="350" height="233.333" alt={service.title} />
-                                <div className="event-content">
-                                    <div className="event-text">
-                                        <h3>{service.title}</h3>
-                                        <p>{service.desc}</p>
-                                        <Link className="btn btn-custom" href={url(service.url)}>More</Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/*
-                  NOTE: If you must retain the 4 separate <div class="row"> blocks
-                  for specific animation grouping in ScrollReveal, you will need
-                  to manually segment the servicesData array into groups of 3/3/3/1.
-                */}
-            </div>
+  return (
+    <section className="py-24 bg-white dark:bg-gray-950 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-6">
+              Our <span className="text-blue-600">Services</span>
+            </h2>
+            <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full mb-8" />
+            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              Tailored technology solutions designed to elevate your business and drive digital transformation.
+            </p>
+          </motion.div>
         </div>
-        // <!-- Event End -->
-    );
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4"
+        >
+          {servicesData.map((service, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              whileHover={{ y: -10 }}
+              className="flex flex-col bg-gray-50 dark:bg-gray-900 overflow-hidden rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-2xl transition-all duration-500 group"
+            >
+              {/* Image Header */}
+              <div className="relative aspect-[16/10] overflow-hidden shrink-0">
+                <img
+                  src={service.img}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/20 to-transparent" />
+              </div>
+
+              {/* Content Area (Below Image) */}
+              <div className="p-8 md:p-10 flex flex-col flex-grow items-start">
+                <div className="mb-4">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-3 py-1 rounded-full">
+                    Innovation
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 group-hover:text-blue-600 transition-colors duration-300">
+                  {service.title}
+                </h3>
+
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
+                  {service.desc}
+                </p>
+
+                <Link
+                  href={service.href}
+                  className="mt-auto w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-tutia hover:bg-blue-700 text-black-800 text-sm font-bold rounded-2xl shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 group/btn border border-blue-500/50"
+                >
+                  View Details
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                </Link>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 }

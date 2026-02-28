@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'; // <-- IMPORT useEffect
 import { Link } from '@inertiajs/react';
 import { route } from 'ziggy-js'; // Use route helper
+import { useTranslation } from 'react-i18next';
 
 interface PublicNavProps {
     auth: { user: any | null };
@@ -30,6 +31,9 @@ const initializeBootstrapCollapse = () => {
 
 
 export default function PublicNav({ auth }: PublicNavProps) {
+    const { t, i18n } = useTranslation();
+    const isRtl = i18n.language === 'ar';
+
     // Re-initialize Bootstrap Collapse logic whenever this component mounts
     useEffect(() => {
         initializeBootstrapCollapse();
@@ -42,7 +46,7 @@ export default function PublicNav({ auth }: PublicNavProps) {
     const isAuthenticated = !!auth.user;
 
     return (
-        <div className="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div dir={isRtl ? 'rtl' : 'ltr'} className="navbar navbar-expand-lg bg-dark navbar-dark">
             <div className="container-fluid">
                 {/* Logo and Brand */}
                 <Link href={route('home')} style={{ fontSize: '1.8rem' }} className="navbar-brand">
@@ -60,38 +64,28 @@ export default function PublicNav({ auth }: PublicNavProps) {
                 </button>
 
                 <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div className="navbar-nav ml-auto">
-                        <Link href={route('home')} className="nav-item nav-link">Home</Link>
+                    <div className={`navbar-nav ${isRtl ? 'mr-auto' : 'ml-auto'}`}>
+                        <Link href={route('home')} className="nav-item nav-link">{t('Home')}</Link>
 
                         {/* Services Dropdown (Converted to React structure) */}
                         <div className="nav-item dropdown">
-                            <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">Services</a>
-                            <div className="dropdown-menu">
-                                <Link href={url('/ecommerce')} className="dropdown-item">E-Commerce</Link>
-                                <Link href={url('/sms')} className="dropdown-item">Bulk SMS</Link>
-                                <Link href={url('/web')} className="dropdown-item">Web Development</Link>
-                                <Link href={url('/connectivity')} className="dropdown-item">Connectivity Solution</Link>
-                                <Link href={url('/ict')} className="dropdown-item">ICT Consulting</Link>
-                                <Link href={url('/call_center')} className="dropdown-item">Call Center</Link>
-                                <Link href={url('/ticketing')} className="dropdown-item">Ticketing System</Link>
-                                <Link href={url('/vpn')} className="dropdown-item">VPN</Link>
-                                <Link href={url('/payment')} className="dropdown-item">Payment Gateway</Link>
-                                <Link href={url('/erp')} className="dropdown-item">ERP System</Link>
+                            <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown">{t('Services')}</a>
+                            <div className={`dropdown-menu ${isRtl ? 'text-right' : ''}`}>
+                                <Link href={url('/satellite-agriculture')} className="dropdown-item">{t('Satellite Agriculture')}</Link>
+                                <Link href={url('/sms')} className="dropdown-item">{t('Bulk SMS')}</Link>
+                                <Link href={url('/web')} className="dropdown-item">{t('Web Development')}</Link>
+                                <Link href={url('/connectivity')} className="dropdown-item">{t('Connectivity Solution')}</Link>
+                                <Link href={url('/ict')} className="dropdown-item">{t('ICT Consulting')}</Link>
+                                <Link href={url('/call_center')} className="dropdown-item">{t('Call Center')}</Link>
+                                <Link href={url('/ticketing')} className="dropdown-item">{t('Ticketing System')}</Link>
+                                <Link href={url('/vpn')} className="dropdown-item">{t('VPN')}</Link>
+                                <Link href={url('/payment')} className="dropdown-item">{t('Payment Gateway')}</Link>
+                                <Link href={url('/erp')} className="dropdown-item">{t('ERP System')}</Link>
                             </div>
                         </div>
 
-                        <Link href={route('offers.show.offers')} className="nav-item nav-link">Offers</Link>
-                        <Link href={route('contact')} className="nav-item nav-link">Contact</Link>
-                        {/* CRM LOGIN/DASHBOARD LINK */}
-                        {/* {isAuthenticated ? (
-                            <Link href={route('dashboard')} className="nav-item nav-link header-btn ml-lg-3">
-                                CRM Dashboard
-                            </Link>
-                        ) : (
-                            <Link href={route('login')} className="nav-item nav-link header-btn ml-lg-3">
-                                CRM Login
-                            </Link>
-                        )} */}
+                        <Link href={route('offers.show.offers')} className="nav-item nav-link">{t('Offers')}</Link>
+                        <Link href={route('contact')} className="nav-item nav-link">{t('Contact')}</Link>
                     </div>
                 </div>
             </div>

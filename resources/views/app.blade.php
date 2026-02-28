@@ -10,12 +10,12 @@
         <link rel="preconnect" href="https://unpkg.com">
 
         <!-- CSS Libraries -->
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
         <link href="{{ asset('lib/flaticon/font/flaticon.css') }}" rel="stylesheet">
         <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
         <link href="{{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
-        
+         -->
         <!-- Template Stylesheet -->
         <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
@@ -83,7 +83,7 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
+        <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600|oswald:400,500,600,700" rel="stylesheet" />
         @routes
         @viteReactRefresh
         @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
@@ -93,22 +93,8 @@
         @inertia
 
         <!-- JavaScript Libraries -->
-        <script src="{{ asset('js/jquery.min.js') }}" defer></script>
-        <script src="{{ asset('js/bootstrap.bundle.min.js') }}" defer></script>
-        <script src="{{ asset('lib/easing/easing.min.js') }}" defer></script>
-        <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}" defer></script>
-        <script src="{{ asset('lib/waypoints/waypoints.min.js') }}" defer></script>
-        <script src="{{ asset('lib/counterup/counterup.min.js') }}" defer></script>
-        <script src="{{ asset('lib/parallax/parallax.min.js') }}" defer></script>
-
+        <!-- Legacy scripts removed to avoid jQuery errors -->
         <script src="https://unpkg.com/scrollreveal" defer></script>
-
-        <!-- Contact Javascript File -->
-        <script src="{{ asset('mail/jqBootstrapValidation.min.js') }}" defer></script>
-        <script src="{{ asset('mail/contact.js') }}" defer></script>
-
-        <!-- Template Javascript -->
-        <script src="{{ asset('js/main.js') }}" defer></script>
 
              <!--Start of Tawk.to Script-->
     <script type="text/javascript">

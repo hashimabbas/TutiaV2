@@ -213,6 +213,10 @@ Route::middleware([CountVisitor::class])->group(function() {
         return Inertia::render('public/Erp');
     })->name('erp');
 
+    Route::get('/satellite-agriculture', function () {
+        return Inertia::render('public/SatelliteAgriculture');
+    })->name('satellite_agriculture');
+
     // OFFERS PAGE (Uses the dedicated Controller method)
 
 

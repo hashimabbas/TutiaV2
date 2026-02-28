@@ -35,6 +35,7 @@ export default function PublicFooter() {
                     <div className="col-lg-4 col-md-6">
                         <div className="footer-link">
                             <h2>Popular Services</h2>
+                            <Link href={url('/satellite-agriculture')}>Satellite Agriculture</Link>
                             <a href="https://matger-tutia.com/">Matger-TUTIA</a>
                             <a href="http://sms.matger-tutia.com/">Bulk SMS</a>
                             <Link href={url('/web')}>Web Development</Link>
@@ -50,7 +51,7 @@ export default function PublicFooter() {
                 <div className="row">
                     <div className="col-md-6">
                         {/* Note: date('Y') must be passed as a prop or hardcoded in pure React */}
-                        <p className="footer-in-phone"><a href="#">TUTIA</a>, All Right Reserved &copy; 2025</p>
+                        <p className="footer-in-phone"><a href="/">TUTIA</a> All Right Reserved &copy; {new Date().getFullYear()}</p>
                     </div>
                 </div>
             </div>

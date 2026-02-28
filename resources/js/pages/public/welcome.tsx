@@ -12,7 +12,7 @@ import PublicHeroEmbla from './Partials/PublicHeroEmbla';
 
 
 export default function Welcome(props: any) {
-    const { auth, flash } = usePage().props;
+    const { auth, flash } = usePage<any>().props;
 
     // --- INTEGRATE SCROLLREVEAL ---
     useScrollRevealAnimations();
@@ -24,38 +24,24 @@ export default function Welcome(props: any) {
         <PublicLayout title="Home" auth={auth} flash={flash}>
             {/* 1. HERO / CAROUSEL SECTION */}
             <PublicHeroEmbla />
-            <React.Suspense fallback={<div className="h-20 flex items-center justify-center p-20"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-tutia"></div></div>}>
-                {/* 2. ABOUT START */}
+            <React.Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-tutia"></div></div>}>
+                {/* 2. ABOUT */}
                 <PublicAbout />
-                {/* ABOUT END */}
 
-                {/* 3. Our (VALUES) START */}
+                {/* 3. CORE VALUES */}
                 <PublicValues />
-                {/* Our VALUES END */}
 
-                {/* 4. EVENT (SERVICES) START */}
+                {/* 4. SERVICES */}
                 <PublicServiceCards />
-                {/* EVENT END */}
 
-                {/* 5. CUSTOMER START */}
-                <div className="causes">
-                    <PublicCustomerCarousels />
-                </div>
-                {/* CUSTOMER END */}
+                {/* 5. CUSTOMERS & PARTNERS */}
+                <PublicCustomerCarousels />
 
-                {/* 6. PARTNER START */}
-                <div className="causes" style={{ marginTop: '167px' }}>
-                    {/* ... (Your Partner Carousel JSX converted) ... */}
-                </div>
-                {/* PARTNER END */}
-
-                {/* 7. TESTIMONIAL START */}
+                {/* 6. TESTIMONIALS */}
                 <PublicTestimonials />
-                {/* TESTIMONIAL END */}
 
-                {/* 8. CONTACT START (Should link to the Contact Page) */}
+                {/* 7. CONTACT */}
                 <PublicContactForm />
-                {/* CONTACT END */}
             </React.Suspense>
 
             {/* --- Whatsup Chat (Often global in layout, but kept here for compliance) --- */}

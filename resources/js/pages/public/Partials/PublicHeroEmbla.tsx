@@ -3,7 +3,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import EmblaCarouselFade from 'embla-carousel-fade';
 import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'framer-motion';
-import { Apple, Cpu, Smartphone } from 'lucide-react';
+import { Apple, Smartphone } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { route } from 'ziggy-js';
 
@@ -17,7 +17,7 @@ const images: ImageType[] = [
     { src: '/images/services/network-g.jpg', alt: 'Connectivity Solution' },
 ];
 
-const HERO_TITLE = 'TUTIA: Technology Solutions Built on Trust';
+const HERO_TITLE = 'TUTIA: TUTIA Trading Services';
 const HERO_SUBTITLE = 'Empowering Your Business with Reliable CRM, ICT, and Seamless Connectivity.';
 
 // --- MAIN HERO COMPONENT ---
@@ -105,12 +105,12 @@ export default function PublicHeroEmbla(): JSX.Element {
 
                         <motion.h1
                             variants={itemVariants}
-                            className="text-balance text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl dark:text-white"
+                            className="text-balance text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl font-oswald dark:text-white"
                         >
-                            <span className="block" style={{ color: 'var(--color-tutia)' }}>
+                            {/* <span className="block" style={{ color: 'var(--color-tutia)' }}>
                                 {HERO_TITLE.split(':')[0]}
-                            </span>
-                            <span className="mt-2 block bg-gradient-to-r from-blue-600 to-tutia bg-clip-text text-transparent">
+                            </span> */}
+                            <span className="mt-2 block bg-gradient-to-r from-blue-600 to-tutia bg-clip-text text-transparent font-oswald">
                                 {HERO_TITLE.split(':')[1]}
                             </span>
                         </motion.h1>
@@ -204,8 +204,8 @@ export default function PublicHeroEmbla(): JSX.Element {
                             <div
                                 className="absolute -right-4 -top-8 flex flex-col items-center gap-2 rounded-2xl border border-white/50 bg-white/80 p-5 shadow-2xl backdrop-blur-xl transition-transform duration-500 hover:-translate-y-2 dark:border-gray-700/50 dark:bg-gray-800/80 lg:-right-8 lg:-top-16"
                             >
-                                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-tutia/10 text-tutia shadow-inner">
-                                    <Cpu className="h-7 w-7" />
+                                <div className="flex h-14 w-14 items-center justify-center rounded-xl ">
+                                    <img src="/logo-transparent.png" alt="Tutia Logo" className="h-10 w-10 object-contain" />
                                 </div>
                                 <div className="text-center">
                                     <div className="text-sm font-bold dark:text-white">Premium Quality</div>
