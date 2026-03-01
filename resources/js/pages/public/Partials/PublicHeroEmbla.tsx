@@ -5,29 +5,35 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { motion } from 'framer-motion';
 import { Apple, Smartphone } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { route } from 'ziggy-js';
 
 // --- TS: Define types for safety ---
 type ImageType = { src: string; alt: string };
 
-// --- Define TUTIA images and content ---
-const images: ImageType[] = [
-    { src: '/images/workspace.jpg', alt: 'TUTIA Office Workspace' },
-    { src: '/images/services/web-design.jpg', alt: 'Web Development Screen' },
-    { src: '/images/services/network-g.jpg', alt: 'Connectivity Solution' },
-];
-
-const HERO_TITLE = 'TUTIA: TUTIA Trading Services';
-const HERO_SUBTITLE = 'Empowering Your Business with Reliable CRM, ICT, and Seamless Connectivity.';
-
-// --- MAIN HERO COMPONENT ---
 export default function PublicHeroEmbla(): JSX.Element {
+    const { t, i18n } = useTranslation();
+    const isRtl = i18n.language === 'ar';
+
+    const images: ImageType[] = [
+        { src: '/images/workspace.jpg', alt: t('TUTIA Office Workspace') },
+        { src: '/images/services/web-design.jpg', alt: t('Web Development Screen') },
+        { src: '/images/services/network-g.jpg', alt: t('Connectivity Solution') },
+    ];
+
+    const HERO_TITLE = t('TUTIA Trading Services');
+    const HERO_SUBTITLE = t('Empowering Your Business with Reliable CRM, ICT, and Seamless Connectivity.');
+
     const {
         props: { auth },
     } = usePage();
 
     // --- Embla Carousel Setup ---
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [
+    const [emblaRef, emblaApi] = useEmblaCarousel({
+        loop: true,
+        align: 'start',
+        direction: isRtl ? 'rtl' : 'ltr'
+    }, [
         Autoplay({ delay: 5000, stopOnInteraction: false }),
         EmblaCarouselFade(),
     ]);
@@ -88,45 +94,42 @@ export default function PublicHeroEmbla(): JSX.Element {
                 <div className="grid grid-cols-1 items-center gap-y-16 lg:grid-cols-2 lg:gap-x-16">
                     {/* LEFT COLUMN: CONTENT & CTAS */}
                     <motion.div
-                        className="flex flex-col text-center lg:text-left"
+                        className={`flex flex-col text-center ${isRtl ? 'lg:text-right' : 'lg:text-left'}`}
                         variants={containerVariants}
                         initial="hidden"
                         animate="visible"
                     >
-                        <motion.div variants={itemVariants} className="mb-6 flex justify-center lg:justify-start">
+                        <motion.div variants={itemVariants} className={`mb-6 flex justify-center ${isRtl ? 'lg:justify-end' : 'lg:justify-start'}`}>
                             <div className="inline-flex items-center gap-2 rounded-full border border-tutia/20 bg-tutia/5 px-4 py-1.5 text-sm font-medium text-tutia dark:border-tutia/30 dark:bg-tutia/10 dark:text-tutia-light">
                                 <span className="relative flex h-2 w-2">
                                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-tutia opacity-75"></span>
                                     <span className="relative inline-flex h-2 w-2 rounded-full bg-tutia"></span>
                                 </span>
-                                Innovative Technology Partners
+                                {t('Innovative Technology Partners')}
                             </div>
                         </motion.div>
 
                         <motion.h1
                             variants={itemVariants}
-                            className="text-balance text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl font-oswald dark:text-white"
+                            className={`text-balance text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl font-oswald dark:text-white`}
                         >
-                            {/* <span className="block" style={{ color: 'var(--color-tutia)' }}>
-                                {HERO_TITLE.split(':')[0]}
-                            </span> */}
                             <span className="mt-2 block bg-gradient-to-r from-blue-600 to-tutia bg-clip-text text-transparent font-oswald">
-                                {HERO_TITLE.split(':')[1]}
+                                {HERO_TITLE}
                             </span>
                         </motion.h1>
 
                         <motion.div variants={itemVariants} className="mt-8">
                             <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                                Unlimited Trust. Unlimited Solutions.
+                                {t('Unlimited Trust. Unlimited Solutions.')}
                             </span>
-                            <p className="mt-6 max-w-xl text-lg leading-relaxed text-gray-600 lg:mx-0 dark:text-gray-400">
+                            <p className={`mt-6 max-w-xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 ${isRtl ? 'lg:mr-0' : 'lg:ml-0'}`}>
                                 {HERO_SUBTITLE}
                             </p>
                         </motion.div>
 
                         <motion.div
                             variants={itemVariants}
-                            className="mt-12 flex flex-wrap items-center justify-center gap-5 lg:justify-start"
+                            className={`mt-12 flex flex-wrap items-center justify-center gap-5 ${isRtl ? 'lg:justify-end' : 'lg:justify-start'}`}
                         >
                             <a
                                 href="https://play.google.com/store/apps/details?id=com.nilogy.matgertutia"
@@ -135,9 +138,9 @@ export default function PublicHeroEmbla(): JSX.Element {
                                 className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-2xl border border-gray-200 bg-white/40 px-8 py-4 text-base font-bold text-gray-800 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/60 hover:shadow-xl dark:border-gray-700/50 dark:bg-gray-800/40 dark:text-white dark:hover:bg-gray-800/60"
                             >
                                 <Smartphone className="h-6 w-6 text-green-500 transition-transform group-hover:rotate-12" />
-                                <div className="text-left">
-                                    <span className="block text-xs font-normal opacity-70">Download on</span>
-                                    <span className="block leading-none">Play Store</span>
+                                <div className={isRtl ? 'text-right' : 'text-left'}>
+                                    <span className="block text-xs font-normal opacity-70">{t('Download on')}</span>
+                                    <span className="block leading-none">{t('Play Store')}</span>
                                 </div>
                             </a>
 
@@ -148,9 +151,9 @@ export default function PublicHeroEmbla(): JSX.Element {
                                 className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-2xl border border-gray-200 bg-white/40 px-8 py-4 text-base font-bold text-gray-800 backdrop-blur-md transition-all hover:scale-105 hover:bg-white/60 hover:shadow-xl dark:border-gray-700/50 dark:bg-gray-800/40 dark:text-white dark:hover:bg-gray-800/60"
                             >
                                 <Apple className="h-6 w-6 text-gray-900 transition-transform group-hover:rotate-12 dark:text-white" />
-                                <div className="text-left">
-                                    <span className="block text-xs font-normal opacity-70">Download on</span>
-                                    <span className="block leading-none">App Store</span>
+                                <div className={isRtl ? 'text-right' : 'text-left'}>
+                                    <span className="block text-xs font-normal opacity-70">{t('Download on')}</span>
+                                    <span className="block leading-none">{t('App Store')}</span>
                                 </div>
                             </a>
                         </motion.div>
@@ -208,16 +211,16 @@ export default function PublicHeroEmbla(): JSX.Element {
                                     <img src="/logo-transparent.png" alt="Tutia Logo" className="h-10 w-10 object-contain" />
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-sm font-bold dark:text-white">Premium Quality</div>
-                                    <div className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">Sudanese Innovation</div>
+                                    <div className="text-sm font-bold dark:text-white font-oswald">{t('Premium Quality')}</div>
+                                    <div className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold">{t('Sudanese Innovation')}</div>
                                 </div>
                             </div>
 
                             {/* Small decorative "Live" dot */}
                             <div className="absolute -left-4 bottom-12 flex h-20 w-20 items-center justify-center rounded-full bg-white/40 shadow-lg backdrop-blur-md dark:bg-gray-800/40 lg:-left-12">
                                 <div className="flex flex-col items-center">
-                                    <span className="text-[10px] font-bold uppercase text-gray-500">Service</span>
-                                    <span className="text-sm font-black text-tutia">UPTIME</span>
+                                    <span className="text-[10px] font-bold uppercase text-gray-500">{t('Service')}</span>
+                                    <span className="text-sm text-center font-black text-tutia">{t('UPTIME')}</span>
                                     <div className="mt-1 flex gap-0.5">
                                         {[1, 2, 3, 4].map(i => <div key={i} className="h-1 w-1 rounded-full bg-green-500" />)}
                                     </div>

@@ -1,30 +1,41 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
-import { route } from 'ziggy-js';
+import { useTranslation } from 'react-i18next';
+import { cn } from '@/lib/utils';
 
 interface PageHeaderProps {
     title: string;
     breadcrumbs: { label: string; url?: string }[];
-    // NOTE: If you need to change the background image per page,
-    // you'll need to pass a prop for that and adjust the style attribute.
 }
 
 export default function ServicesPageHeader({ title, breadcrumbs }: PageHeaderProps) {
+    const { i18n } = useTranslation();
+    const isRtl = i18n.language === 'ar';
+
     return (
         // <!-- Page Header Start -->
-        <div className="page-header">
+        <div className="page-header" dir={isRtl ? 'rtl' : 'ltr'}>
             <div className="container">
                 <div className="row">
-                    <div className="col-12">
-                        <h2>{title}</h2>
+                    <div className={cn(
+                        "col-12",
+                        isRtl ? "text-right" : "text-left"
+                    )}>
+                        <h2 className="font-oswald">{title}</h2>
                     </div>
-                    <div className="col-12">
+                    <div className={cn(
+                        "col-12",
+                        isRtl ? "text-right" : "text-left"
+                    )}>
                         {breadcrumbs.map((item, index) => (
                             <React.Fragment key={index}>
                                 {item.url ? (
                                     <Link href={item.url}>{item.label}</Link>
                                 ) : (
-                                    <a href="#">{item.label}</a> // Use <a> tag for non-Inertia link or placeholder
+                                    <span>{item.label}</span>
+                                )}
+                                {index < breadcrumbs.length - 1 && (
+                                    <span className="mx-2">{isRtl ? '/' : '/'}</span>
                                 )}
                             </React.Fragment>
                         ))}

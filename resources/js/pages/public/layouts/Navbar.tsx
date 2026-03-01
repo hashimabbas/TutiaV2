@@ -3,7 +3,7 @@ import { type SharedData } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Rocket, Smartphone, Globe, Shield, HelpCircle, PhoneCall, Clock, CreditCard, Layout, Tractor, Languages } from 'lucide-react';
+import { Menu, X, ChevronDown, Rocket, Smartphone, Globe, Shield, HelpCircle, PhoneCall, Clock, CreditCard, Layout, Tractor, Languages, ShoppingBag } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 // --- START: TUTIA SPECIFIC LINK CONFIGURATION ---
@@ -51,6 +51,7 @@ export default function Navbar() {
       icon: Rocket,
       dropdown: [
         { name: t('Satellite Agriculture'), href: '/satellite-agriculture', icon: Tractor, desc: t('Precision farming solutions') },
+        { name: t('E-commerce'), href: '/ecommerce', icon: ShoppingBag, desc: t('Online store solutions') },
         { name: t('Bulk SMS'), href: '/sms', icon: Smartphone, desc: t('Direct marketing reach') },
         { name: t('Web Development'), href: '/web', icon: Globe, desc: t('Custom digital experiences') },
         { name: t('Connectivity Solution'), href: '/connectivity', icon: Shield, desc: t('Secure network pipes') },

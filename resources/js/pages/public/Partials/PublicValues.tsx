@@ -1,51 +1,55 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
-
-const valuesData = [
-    {
-        title: 'Trust',
-        icon: '/images/values/trust.png',
-        desc: '"We know that trust must be earned, so we strive every day to act in ways to build up trust in our clients, ourselves and others."',
-    },
-    {
-        title: 'Commitment',
-        icon: '/images/values/commitment.png',
-        desc: 'We recognize the importance of providing excellent services and creating an environment where commitment is part of the fabric of who we are!',
-    },
-    {
-        title: 'Integrity',
-        icon: '/images/values/integration.png',
-        desc: 'We value our reputation and conduct our business with Integrity, honesty, and respect for each individual. We will be as open as we can be with our clients and our people',
-    },
-    {
-        title: 'Result Orientation',
-        icon: '/images/values/stadistics.png',
-        desc: 'We seek to deliver excellent results and we ansure our clients and customers that our results will absolutely exceed their expectations ',
-    },
-];
-
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.1
-        }
-    }
-};
-
-const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-        opacity: 1,
-        x: 0,
-        transition: { duration: 0.5 }
-    }
-};
+import { useTranslation } from 'react-i18next';
 
 export default function PublicValues() {
+    const { t, i18n } = useTranslation();
+    const isRtl = i18n.language === 'ar';
+
+    const valuesData = useMemo(() => [
+        {
+            title: t('Trust'),
+            icon: '/images/values/trust.png',
+            desc: t('Trust Text'),
+        },
+        {
+            title: t('Commitment'),
+            icon: '/images/values/commitment.png',
+            desc: t('Commitment Text'),
+        },
+        {
+            title: t('Integrity'),
+            icon: '/images/values/integration.png',
+            desc: t('Integrity Text'),
+        },
+        {
+            title: t('Result Orientation'),
+            icon: '/images/values/stadistics.png',
+            desc: t('Result Orientation Text'),
+        },
+    ], [t]);
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, x: isRtl ? 20 : -20 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.5 }
+        }
+    };
+
     return (
-        <section className="py-24 bg-white dark:bg-gray-950">
+        <section className="py-24 bg-white dark:bg-gray-950" dir={isRtl ? 'rtl' : 'ltr'}>
             <div className="container mx-auto px-4 max-w-7xl">
                 {/* Header Section */}
                 <div className="text-center mb-20 px-4">
@@ -55,11 +59,11 @@ export default function PublicValues() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-[#2980b9] mb-4">
-                            Our Values
+                        <h2 className="text-4xl md:text-5xl font-bold text-[#2980b9] mb-4 font-oswald">
+                            {t('Our Values')}
                         </h2>
                         <p className="text-lg md:text-xl text-[#34495e] font-bold max-w-3xl mx-auto leading-tight">
-                            Our Values Express The Expectations Of Ourselves And Others To Identify How We Conduct Business Decisions And Action
+                            {t('Values Subtitle')}
                         </p>
                     </motion.div>
                 </div>
@@ -91,8 +95,8 @@ export default function PublicValues() {
                             <div className="w-1.5 self-stretch bg-amber-400 rounded-full mt-2 mb-2 shrink-0" />
 
                             {/* Text Content */}
-                            <div className="flex flex-col">
-                                <h3 className="text-2xl font-bold text-[#2980b9] mb-3">
+                            <div className={`flex flex-col ${isRtl ? 'text-right' : 'text-left'}`}>
+                                <h3 className="text-2xl font-bold text-[#2980b9] mb-3 font-oswald">
                                     {value.title}
                                 </h3>
                                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-[15px] font-medium">

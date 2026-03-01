@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 import PublicContactForm from './Partials/PublicContactForm';
 import PublicLayout from './layouts/PublicLayout';
@@ -8,18 +9,20 @@ import SatelliteAgricultureContent from './Partials/Services/SatelliteAgricultur
 
 export default function SatelliteAgriculture(props: any) {
   const { auth, flash } = usePage<{ auth: any; flash: any }>().props;
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.language === 'ar';
 
   const breadcrumbs = [
-    { label: 'Home', url: route('home') },
-    { label: 'Services' },
-    { label: 'Satellite Agriculture' }
+    { label: t('Home'), url: route('home') },
+    { label: t('Services') },
+    { label: t('Satellite Agriculture') }
   ];
 
   return (
-    <PublicLayout title="Satellite Agriculture" auth={auth} flash={flash}>
+    <PublicLayout title={t("Satellite Agriculture")} auth={auth} flash={flash}>
 
       {/* 1. PAGE HEADER */}
-      <ServicesPageHeader title="Satellite-Based Earth Agriculture" breadcrumbs={breadcrumbs} />
+      <ServicesPageHeader title={t("Satellite Title")} breadcrumbs={breadcrumbs} />
 
       {/* 2. MAIN CONTENT */}
       <SatelliteAgricultureContent />
@@ -28,7 +31,7 @@ export default function SatelliteAgriculture(props: any) {
       <PublicContactForm />
 
       {/* 4. WHATSAPP CHAT */}
-      <div className="whatsup-chat">
+      <div className="whatsup-chat" style={{ [isRtl ? 'left' : 'right']: '20px' }}>
         <a href="https://wa.me/249912329449" target="_blank">
           <img src="images/whatsapp-icon-.jpg" width="60px" height="60px" alt="whatsup-logo" />
         </a>

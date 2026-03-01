@@ -1,42 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Building2, Target, Eye } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const aboutContent = {
-    about: {
-        title: "About Us",
-        icon: <Building2 className="w-5 h-5" />,
-        text: "TUTIA is a leading Sudanese company providing information technology services consulting, implementing and support. It envisioned and instigated the adoption of flexible technology practices to operate efficiently and produce more value.\n\nAt Tutia we live by a set of values that drive our daily behavior and enable us to achieve our vision and goals."
-    },
-    mission: {
-        title: "Mission",
-        icon: <Target className="w-5 h-5" />,
-        text: "We will continue to challenge ourselves and set new performance standards by investing in the future of our Customers and seeking knowledge and innovation in order to exceed expectations in serving our community."
-    },
-    vision: {
-        title: "Vision",
-        icon: <Eye className="w-5 h-5" />,
-        text: "Our Vision is to remain the Preferred ICT & Trading Company in Sudan, leading the Technology Market Growth in Sudan and expanding in the region within adjacent countries, driving economic prosperity, and providing the highest Value for all our stakeholders through operational excellence."
-    }
-};
-
-type TabKey = keyof typeof aboutContent;
+import { useTranslation } from 'react-i18next';
 
 export default function PublicAbout() {
+    const { t, i18n } = useTranslation();
+    const isRtl = i18n.language === 'ar';
+
+    const aboutContent = useMemo(() => ({
+        about: {
+            title: t("About Us"),
+            icon: <Building2 className="w-5 h-5" />,
+            text: t("About Text")
+        },
+        mission: {
+            title: t("Mission"),
+            icon: <Target className="w-5 h-5" />,
+            text: t("Mission Text")
+        },
+        vision: {
+            title: t("Vision"),
+            icon: <Eye className="w-5 h-5" />,
+            text: t("Vision Text")
+        }
+    }), [t]);
+
+    type TabKey = keyof typeof aboutContent;
     const [activeTab, setActiveTab] = useState<TabKey>('about');
 
     return (
-        <section className="py-24 bg-white dark:bg-gray-950 overflow-hidden relative">
+        <section className="py-24 bg-white dark:bg-gray-950 overflow-hidden relative" dir={isRtl ? 'rtl' : 'ltr'}>
             {/* Background elements */}
-            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-tutia/5 blur-3xl" />
+            <div className={cn(
+                "absolute top-0 w-80 h-80 rounded-full bg-tutia/5 blur-3xl",
+                isRtl ? "left-0 -ml-20 -mt-20" : "right-0 -mr-20 -mt-20"
+            )} />
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                     {/* Left Column: Image Stack */}
                     <motion.div
-                        initial={{ opacity: 0, x: -40 }}
+                        initial={{ opacity: 0, x: isRtl ? 40 : -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.7 }}
@@ -45,21 +51,24 @@ export default function PublicAbout() {
                         <div className="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl ring-1 ring-black/5">
                             <img
                                 src="/images/desk.jpg"
-                                alt="Modern office environment"
+                                alt={t("Modern office environment")}
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-tr from-tutia/40 to-transparent mix-blend-multiply" />
                         </div>
 
                         {/* Decorative floating card */}
-                        <div className="absolute -bottom-8 -right-8 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 max-w-xs backdrop-blur-sm bg-white/90 dark:bg-gray-900/90 hidden sm:block">
+                        <div className={cn(
+                            "absolute -bottom-8 bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 max-w-xs backdrop-blur-sm bg-white/90 dark:bg-gray-900/90 hidden sm:block",
+                            isRtl ? "-left-8" : "-right-8"
+                        )}>
                             <div className="flex items-center gap-4">
                                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-tutia/10 text-tutia">
                                     <span className="font-bold text-xl">10+</span>
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-gray-900 dark:text-white">Years of</p>
-                                    <p className="text-sm text-gray-500 font-medium">Industry Excellence</p>
+                                    <p className="font-semibold text-gray-900 dark:text-white">{t("Years of")}</p>
+                                    <p className="text-sm text-gray-500 font-medium">{t("Industry Excellence")}</p>
                                 </div>
                             </div>
                         </div>
@@ -71,18 +80,25 @@ export default function PublicAbout() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 0.7, delay: 0.2 }}
+                        className={isRtl ? "text-right" : "text-left"}
                     >
                         <div className="mb-8">
                             <span className="text-tutia font-semibold tracking-wider uppercase text-sm mb-2 block">
-                                Discover Tutia
+                                {t("Discover Tutia")}
                             </span>
                             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                                Empowering growth through <span className="text-transparent bg-clip-text bg-gradient-to-r from-tutia to-blue-600">technology</span>.
+                                {t("Empowering growth through")}{" "}
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-tutia to-blue-600">
+                                    {t("technology")}
+                                </span>.
                             </h2>
                         </div>
 
                         {/* Modern Tab Navigation */}
-                        <div className="flex p-1 space-x-1 bg-gray-100/80 dark:bg-gray-800/80 rounded-xl mb-8 backdrop-blur-md">
+                        <div className={cn(
+                            "flex p-1 bg-gray-100/80 dark:bg-gray-800/80 rounded-xl mb-8 backdrop-blur-md",
+                            isRtl ? "space-x-reverse space-x-1" : "space-x-1"
+                        )}>
                             {(Object.keys(aboutContent) as TabKey[]).map((tab) => (
                                 <button
                                     key={tab}

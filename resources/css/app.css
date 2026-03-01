@@ -13,6 +13,7 @@
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
     --font-oswald: 'Oswald', sans-serif;
+    --font-cairo: 'Cairo', sans-serif;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -149,4 +150,17 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+
+html[dir="rtl"] {
+    --font-sans: 'Cairo', sans-serif;
+    --font-oswald: 'Cairo', sans-serif;
+}
+
+html[dir="rtl"] body {
+    font-family: 'Cairo', sans-serif !important;
+}
+
+html[dir="rtl"] .font-oswald {
+    font-family: 'Cairo', sans-serif !important;
 }
